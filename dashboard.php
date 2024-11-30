@@ -1,18 +1,25 @@
 <?php
+// Start the session to maintain user state
 session_start();
+
+// Include database connection and utility functions
 require_once 'config.php';
 
+// Check if user is logged in, redirect to login if not
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
+// Get user information from session
 $user_id = $_SESSION['user_id'];
+
+// Fetch user information from database
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
-// Get task statistics
+// Fetch task statistics
 $total_stmt = $pdo->prepare("SELECT COUNT(*) FROM tasks WHERE user_id = ?");
 $total_stmt->execute([$user_id]);
 $total_tasks = $total_stmt->fetchColumn();
@@ -48,25 +55,30 @@ $stmt = $pdo->prepare("SELECT a.*, t.title FROM activities a
 $stmt->execute([$user_id]);
 $activities = $stmt->fetchAll();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - TaskFlow</title>
+    <!-- External CSS and Font dependencies -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Main Layout Container -->
     <div class="layout">
+        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
-        <a href="#" class="logo">
-            <i class="fas fa-tasks"></i>
-            TaskFlow
-        </a>
+                <a href="#" class="logo">
+                    <i class="fas fa-tasks"></i>
+                    TaskFlow
+                </a>
                 <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
             </div>
+            <!-- Navigation Menu -->
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="active"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="#" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add Task</a>
@@ -75,7 +87,9 @@ $activities = $stmt->fetchAll();
             </nav>
         </aside>
 
+        <!-- Main Content Area -->
         <main class="main-content">
+            <!-- Top Header with Welcome Message -->
             <header class="top-header">
                 <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
                 <h1>Dashboard</h1>
@@ -93,6 +107,7 @@ $activities = $stmt->fetchAll();
                 </div>
             </header>
 
+            <!-- Statistics Cards -->
             <div class="stats-container">
                 <div class="stat-card total">
                     <h3>Total Tasks</h3>
@@ -111,6 +126,7 @@ $activities = $stmt->fetchAll();
                 </div>
             </div>
 
+            <!-- Task Overview Section -->
             <div class="dashboard-content">
                 <div class="tasks-section">
                     <div class="section-header">
@@ -270,32 +286,13 @@ $activities = $stmt->fetchAll();
     </div>
 
     <script>
-        function showAddTaskModal() {
-            document.getElementById('addTaskModal').style.display = 'block';
-        }
-
-        function closeAddTaskModal() {
-            document.getElementById('addTaskModal').style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('addTaskModal')) {
-                closeAddTaskModal();
-            }
-        }
-
-        // Mobile menu toggle
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
-        const sidebar = document.querySelector('.sidebar');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            sidebar.classList.add('show');
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.add('show');
         });
 
-        mobileMenuClose.addEventListener('click', () => {
-            sidebar.classList.remove('show');
+        document.querySelector('.mobile-menu-close').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('show');
         });
 
         // User menu toggle
@@ -310,6 +307,22 @@ $activities = $stmt->fetchAll();
                 document.getElementById('userDropdown').classList.remove('show');
             }
         });
+
+        // Add Task Modal Functions
+        function showAddTaskModal() {
+            document.getElementById('addTaskModal').style.display = 'block';
+        }
+
+        function closeAddTaskModal() {
+            document.getElementById('addTaskModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('addTaskModal')) {
+                closeAddTaskModal();
+            }
+        }
 
         // Edit Task Modal Functions
         function showEditTaskModal(taskId) {

@@ -1,22 +1,30 @@
 <?php
+// Start the session to maintain user state
 session_start();
+
+// Include database connection and utility functions
 require_once 'config.php';
 
+// Check if user is logged in, redirect to login if not
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
+// Get user information from session
 $user_id = $_SESSION['user_id'];
+
+// Prepare SQL query to retrieve user name
 $stmt = $pdo->prepare("SELECT name FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
-// Get tasks with filters
+// Handle task filtering
 $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
 $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'due_date';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+// Prepare the SQL query based on filters
 $where_clause = "WHERE user_id = ?";
 $params = [$user_id];
 
@@ -31,29 +39,37 @@ if ($search) {
     $params[] = "%$search%";
 }
 
-$stmt = $pdo->prepare("SELECT * FROM tasks $where_clause ORDER BY $sort_by ASC");
+$sql = "SELECT * FROM tasks $where_clause ORDER BY $sort_by ASC";
+
+// Execute the filtered query
+$stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $tasks = $stmt->fetchAll();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks - TaskFlow</title>
+    <!-- External CSS and Font dependencies -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Main Layout Container -->
     <div class="layout">
+        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
-            <a href="#" class="logo">
-            <i class="fas fa-tasks"></i>
-            TaskFlow
-        </a>
+                <a href="#" class="logo">
+                    <i class="fas fa-tasks"></i>
+                    TaskFlow
+                </a>
                 <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
             </div>
+            <!-- Navigation Menu -->
             <nav class="sidebar-nav">
                 <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="#" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add Task</a>
@@ -62,8 +78,10 @@ $tasks = $stmt->fetchAll();
             </nav>
         </aside>
 
+        <!-- Main Content Area -->
         <main class="main-content">
-        <header class="top-header">
+            <!-- Top Header with Filters -->
+            <header class="top-header">
                 <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
                 <h1>Tasks</h1>
                 <div class="user-menu">
@@ -242,13 +260,12 @@ $tasks = $stmt->fetchAll();
             document.getElementById('addTaskModal').style.display = 'block';
         }
 
-
         function closeAddTaskModal() {
             document.getElementById('addTaskModal').style.display = 'none';
         }
 
-          // User menu toggle
-          function toggleUserMenu() {
+        // User menu toggle
+        function toggleUserMenu() {
             const dropdown = document.getElementById('userDropdown');
             dropdown.classList.toggle('show');
         }

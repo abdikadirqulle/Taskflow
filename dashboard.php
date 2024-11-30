@@ -184,20 +184,32 @@ $activities = $stmt->fetchAll();
                     </div>
                 </div>
 
+                <!-- Recent Activities -->
                 <div class="activities-section">
                     <h2>Recent Activities</h2>
                     <div class="activities-list">
                         <?php foreach ($activities as $activity): ?>
-                        <div class="activity-item">
-                            <i class="fas fa-circle"></i>
-                            <div class="activity-content">
-                                <p><?php echo htmlspecialchars($activity['action']); ?></p>
-                                <small><?php echo date('M j, Y g:i A', strtotime($activity['created_at'])); ?></small>
+                            <?php 
+                                $actionClass = '';
+                                if (stripos($activity['action'], 'created') !== false) {
+                                    $actionClass = 'activity-create';
+                                } elseif (stripos($activity['action'], 'deleted') !== false) {
+                                    $actionClass = 'activity-delete';
+                                } elseif (stripos($activity['action'], 'updated') !== false) {
+                                    $actionClass = 'activity-update';
+                                }
+                            ?>
+                            <div class="activity-item <?php echo $actionClass; ?>">
+                                <i class="fas fa-circle"></i>
+                                <div class="activity-details">
+                                    <p><?php echo htmlspecialchars($activity['action']); ?></p>
+                                    <small><?php echo date('M d, Y H:i', strtotime($activity['created_at'])); ?></small>
+                                </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>

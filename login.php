@@ -25,11 +25,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - TaskFlow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1D4ED8;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-box">
+    <a href="#" class="logo">
+            <i class="fas fa-tasks"></i>
+            TaskFlow
+        </a>
             <h1>Sign in to your account</h1>
             <?php if (isset($error)): ?>
                 <div class="error"><?php echo $error; ?></div>

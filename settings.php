@@ -59,7 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="layout">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>TaskFlow</h2>
+            <a href="#" class="logo">
+            <i class="fas fa-tasks"></i>
+            TaskFlow
+        </a>
                 <button  class="mobile-menu-close"><i class="fas fa-times"></i></button>
             </div>
             <nav class="sidebar-nav">

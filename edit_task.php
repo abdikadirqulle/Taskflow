@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <header>
             <h1>Edit Task</h1>
             <nav>
-                <a href="index.php">Back to Dashboard</a>
+                <a href="dashboard.php">Back to Dashboard</a>
             </nav>
         </header>
         

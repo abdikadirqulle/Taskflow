@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button  class="mobile-menu-close"><i class="fas fa-times"></i></button>
             </div>
             <nav class="sidebar-nav">
-                <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="#" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add Task</a>
                 <a href="tasks.php"><i class="fas fa-tasks"></i> Task List</a>
                 <a href="settings.php" class="active"><i class="fas fa-cog"></i> Settings</a>

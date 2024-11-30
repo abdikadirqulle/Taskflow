@@ -56,7 +56,7 @@ Project Structure:
   - tasks/
   - dashboard/
 /public
-  - index.php
+  - dashboard.php
   - assets/
 /controllers
   - AuthController.php

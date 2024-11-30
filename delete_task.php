@@ -15,6 +15,6 @@ if (isset($_GET['id'])) {
     $stmt->execute([$task_id, $user_id]);
 }
 
-header('Location: index.php');
+header('Location: dashboard.php');
 exit();
 ?>

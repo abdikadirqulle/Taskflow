@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute([$user_id, $task_id, "Created new task: $title"]);
 
         $pdo->commit();
-        header('Location: index.php');
+        header('Location: dashboard.php');
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();

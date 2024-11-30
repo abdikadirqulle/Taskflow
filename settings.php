@@ -43,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,12 +71,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </aside>
 
         <main class="main-content">
-            <header class="top-header">
+        <header class="top-header">
                 <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
-                <h1>Settings</h1>
+                <h1>Setting</h1>
                 <div class="user-menu">
-                    <span>Welcome, <?php echo htmlspecialchars($user['name']); ?></span>
-                    <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <div class="user-profile" onclick="toggleUserMenu()">
+                        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user['name']); ?>&background=1D4ED8&color=fff" alt="Profile">
+                        <span><?php echo htmlspecialchars($user['name']); ?></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="settings.php"><i class="fas fa-user"></i> Profile Settings</a>
+                        <a href="#"><i class="fas fa-credit-card"></i> Billing</a>
+                        <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
                 </div>
             </header>
 
@@ -133,6 +143,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         mobileMenuClose.addEventListener('click', () => {
             sidebar.classList.remove('show');
         });
+          // User menu toggle
+          function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('show');
+        }
     </script>
 </body>
 </html>

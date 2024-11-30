@@ -60,12 +60,20 @@ $tasks = $stmt->fetchAll();
         </aside>
 
         <main class="main-content">
-            <header class="top-header">
+        <header class="top-header">
                 <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
                 <h1>Tasks</h1>
                 <div class="user-menu">
-                    <span>Welcome, <?php echo htmlspecialchars($user['name']); ?></span>
-                    <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <div class="user-profile" onclick="toggleUserMenu()">
+                        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user['name']); ?>&background=1D4ED8&color=fff" alt="Profile">
+                        <span><?php echo htmlspecialchars($user['name']); ?></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="settings.php"><i class="fas fa-user"></i> Profile Settings</a>
+                        <a href="#"><i class="fas fa-credit-card"></i> Billing</a>
+                        <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
                 </div>
             </header>
 
@@ -231,8 +239,15 @@ $tasks = $stmt->fetchAll();
             document.getElementById('addTaskModal').style.display = 'block';
         }
 
+
         function closeAddTaskModal() {
             document.getElementById('addTaskModal').style.display = 'none';
+        }
+
+          // User menu toggle
+          function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('show');
         }
 
         // Edit Task Modal Functions

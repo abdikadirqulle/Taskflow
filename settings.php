@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <main class="main-content">
         <header class="top-header">
                 <button onclick="mobileMenuToggle()" class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
-                <!-- <h1>Setting</h1> -->
+                <h1>Setting</h1>
                 <div class="user-menu">
                     <div class="user-profile" onclick="toggleUserMenu()">
                         <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user['name']); ?>&background=1D4ED8&color=fff" alt="Profile">

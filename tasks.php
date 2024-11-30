@@ -1,0 +1,203 @@
+<?php
+session_start();
+require_once 'config.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT name FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
+
+// Get tasks with filters
+$status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
+$sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'due_date';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+$where_clause = "WHERE user_id = ?";
+$params = [$user_id];
+
+if ($status_filter !== 'all') {
+    $where_clause .= " AND status = ?";
+    $params[] = $status_filter;
+}
+
+if ($search) {
+    $where_clause .= " AND (title LIKE ? OR description LIKE ?)";
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+}
+
+$stmt = $pdo->prepare("SELECT * FROM tasks $where_clause ORDER BY $sort_by ASC");
+$stmt->execute($params);
+$tasks = $stmt->fetchAll();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks - TaskFlow</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>TaskFlow</h2>
+                <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add Task</a>
+                <a href="tasks.php" class="active"><i class="fas fa-tasks"></i> Task List</a>
+                <a href="settings.php"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+                <h1>Tasks</h1>
+                <div class="user-menu">
+                    <span>Welcome, <?php echo htmlspecialchars($user['name']); ?></span>
+                    <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </header>
+
+            <div class="tasks-page">
+                <div class="tasks-controls">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search tasks..." value="<?php echo htmlspecialchars($search); ?>" 
+                               onchange="window.location.href='?search=' + this.value">
+                    </div>
+                    <div class="filters">
+                        <select onchange="window.location.href='?status=' + this.value">
+                            <option value="all" <?php echo $status_filter === 'all' ? 'selected' : ''; ?>>All Status</option>
+                            <option value="Todo" <?php echo $status_filter === 'Todo' ? 'selected' : ''; ?>>Todo</option>
+                            <option value="In Progress" <?php echo $status_filter === 'In Progress' ? 'selected' : ''; ?>>In Progress</option>
+                            <option value="Done" <?php echo $status_filter === 'Done' ? 'selected' : ''; ?>>Done</option>
+                        </select>
+                        <select onchange="window.location.href='?sort=' + this.value">
+                            <option value="due_date" <?php echo $sort_by === 'due_date' ? 'selected' : ''; ?>>Sort by Due Date</option>
+                            <option value="priority" <?php echo $sort_by === 'priority' ? 'selected' : ''; ?>>Sort by Priority</option>
+                            <option value="title" <?php echo $sort_by === 'title' ? 'selected' : ''; ?>>Sort by Title</option>
+                        </select>
+                        <button class="add-task-btn" onclick="showAddTaskModal()">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tasks-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TITLE</th>
+                                <th>DUE DATE</th>
+                                <th>PRIORITY</th>
+                                <th>STATUS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($tasks as $task): ?>
+                            <tr>
+                                <td>
+                                    <div class="task-title">
+                                        <?php echo htmlspecialchars($task['title']); ?>
+                                        <small><?php echo htmlspecialchars($task['description']); ?></small>
+                                    </div>
+                                </td>
+                                <td><?php echo $task['due_date']; ?></td>
+                                <td><span class="priority <?php echo strtolower($task['priority']); ?>"><?php echo $task['priority']; ?></span></td>
+                                <td><span class="status <?php echo str_replace(' ', '-', strtolower($task['status'])); ?>"><?php echo $task['status']; ?></span></td>
+                                <td class="actions">
+                                    <a href="edit_task.php?id=<?php echo $task['id']; ?>" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                    <a href="delete_task.php?id=<?php echo $task['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTaskModal()">&times;</span>
+            <h2>Add New Task</h2>
+            <form action="add_task.php" method="POST">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select name="priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="Todo">Todo</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" name="due_date" required>
+                </div>
+                <button type="submit" class="btn-primary">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const sidebar = document.querySelector('.sidebar');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.add('show');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+        });
+
+        // Modal functions
+        function showAddTaskModal() {
+            document.getElementById('addTaskModal').style.display = 'block';
+        }
+
+        function closeAddTaskModal() {
+            document.getElementById('addTaskModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('addTaskModal')) {
+                closeAddTaskModal();
+            }
+        }
+    </script>
+</body>
+</html>

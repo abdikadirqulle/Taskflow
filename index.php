@@ -155,7 +155,7 @@ $activities = $stmt->fetchAll();
                                     <td><span class="priority <?php echo strtolower($task['priority']); ?>"><?php echo $task['priority']; ?></span></td>
                                     <td><span class="status <?php echo str_replace(' ', '-', strtolower($task['status'])); ?>"><?php echo $task['status']; ?></span></td>
                                     <td class="actions">
-                                        <a href="edit_task.php?id=<?php echo $task['id']; ?>" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                        <a href="#" onclick="showEditTaskModal(<?php echo $task['id']; ?>)" class="edit-btn"><i class="fas fa-edit"></i></a>
                                         <a href="delete_task.php?id=<?php echo $task['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -224,6 +224,48 @@ $activities = $stmt->fetchAll();
         </div>
     </div>
 
+    <!-- Edit Task Modal -->
+    <div id="editTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <span class="close" onclick="closeEditTaskModal()">&times;</span>
+            </div>
+            <form id="editTaskForm" method="POST" onsubmit="return updateTask(event)">
+                <input type="hidden" name="task_id" id="edit_task_id">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" id="edit_title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" id="edit_description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select name="priority" id="edit_priority" required>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" id="edit_status" required>
+                        <option value="Todo">Todo</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" name="due_date" id="edit_due_date" required>
+                </div>
+                <button type="submit" class="btn-primary">Update Task</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         function showAddTaskModal() {
             document.getElementById('addTaskModal').style.display = 'block';
@@ -265,6 +307,63 @@ $activities = $stmt->fetchAll();
                 document.getElementById('userDropdown').classList.remove('show');
             }
         });
+
+        // Edit Task Modal Functions
+        function showEditTaskModal(taskId) {
+            fetch(`edit_task.php?id=${taskId}&ajax=1`)
+                .then(response => response.json())
+                .then(task => {
+                    document.getElementById('edit_task_id').value = task.id;
+                    document.getElementById('edit_title').value = task.title;
+                    document.getElementById('edit_description').value = task.description;
+                    document.getElementById('edit_priority').value = task.priority;
+                    document.getElementById('edit_status').value = task.status;
+                    document.getElementById('edit_due_date').value = task.due_date;
+                    
+                    document.getElementById('editTaskModal').style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function closeEditTaskModal() {
+            document.getElementById('editTaskModal').style.display = 'none';
+        }
+
+        function updateTask(event) {
+            event.preventDefault();
+            const form = document.getElementById('editTaskForm');
+            const formData = new FormData(form);
+            formData.append('ajax', '1');
+
+            fetch('edit_task.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    closeEditTaskModal();
+                    window.location.reload();
+                } else {
+                    const errorMessage = data.message || 'Failed to update task';
+                    alert(errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to update task. Please try again.');
+            });
+
+            return false;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editTaskModal');
+            if (event.target == modal) {
+                closeEditTaskModal();
+            }
+        }
     </script>
 </body>
 </html>

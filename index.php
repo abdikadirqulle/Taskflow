@@ -22,6 +22,31 @@ $completed_stmt->execute([$user_id]);
 $completed_tasks = $completed_stmt->fetchColumn();
 
 $progress_percentage = $total_tasks > 0 ? round(($completed_tasks / $total_tasks) * 100) : 0;
+
+// Get tasks with filtering and sorting
+$status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
+$sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'due_date';
+
+$where_clause = "WHERE user_id = ?";
+if ($status_filter !== 'all') {
+    $where_clause .= " AND status = ?";
+}
+
+$stmt = $pdo->prepare("SELECT * FROM tasks $where_clause ORDER BY $sort_by ASC");
+$params = [$user_id];
+if ($status_filter !== 'all') {
+    $params[] = $status_filter;
+}
+$stmt->execute($params);
+$tasks = $stmt->fetchAll();
+
+// Get recent activities
+$stmt = $pdo->prepare("SELECT a.*, t.title FROM activities a 
+                      LEFT JOIN tasks t ON a.task_id = t.id 
+                      WHERE a.user_id = ? 
+                      ORDER BY a.created_at DESC LIMIT 5");
+$stmt->execute([$user_id]);
+$activities = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -194,7 +219,7 @@ $progress_percentage = $total_tasks > 0 ? round(($completed_tasks / $total_tasks
                     <label>Due Date</label>
                     <input type="date" name="due_date" required>
                 </div>
-                <button type="submit">Add Task</button>
+                <button type="submit" class="btn-primary">Add Task</button>
             </form>
         </div>
     </div>

@@ -191,11 +191,12 @@ $activities = $stmt->fetchAll();
                         <?php foreach ($activities as $activity): ?>
                             <?php 
                                 $actionClass = '';
-                                if (stripos($activity['action'], 'created') !== false) {
+                                $action = strtolower($activity['action']);
+                                if (strpos($action, 'created') !== false) {
                                     $actionClass = 'activity-create';
-                                } elseif (stripos($activity['action'], 'deleted') !== false) {
+                                } elseif (strpos($action, 'deleted') !== false) {
                                     $actionClass = 'activity-delete';
-                                } elseif (stripos($activity['action'], 'updated') !== false) {
+                                } elseif (strpos($action, 'updated') !== false) {
                                     $actionClass = 'activity-update';
                                 }
                             ?>

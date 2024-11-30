@@ -56,6 +56,7 @@ $tasks = $stmt->fetchAll();
     <!-- External CSS and Font dependencies -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="assets/faviconIco.png" type="image/x-icon">
 </head>
 <body>
     <!-- Main Layout Container -->

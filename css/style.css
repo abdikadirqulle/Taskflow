@@ -638,8 +638,10 @@ textarea {
     }
 }
 
+@media (min-width: 768px) {
 /* Hide mobile elements by default */
 .mobile-menu-toggle,
 .mobile-menu-close {
     display: none;
+}
 }

@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h2>TaskFlow</h2>
-                <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+                <button  class="mobile-menu-close"><i class="fas fa-times"></i></button>
             </div>
             <nav class="sidebar-nav">
                 <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <main class="main-content">
         <header class="top-header">
-                <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
-                <h1>Setting</h1>
+                <button onclick="mobileMenuToggle()" class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+                <!-- <h1>Setting</h1> -->
                 <div class="user-menu">
                     <div class="user-profile" onclick="toggleUserMenu()">
                         <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user['name']); ?>&background=1D4ED8&color=fff" alt="Profile">
@@ -148,6 +148,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const dropdown = document.getElementById('userDropdown');
             dropdown.classList.toggle('show');
         }
+
+        // show add task Modal 
+        function showAddTaskModal() {
+            document.getElementById('addTaskModal').style.display = 'block';
+        }
+
     </script>
 </body>
 </html>

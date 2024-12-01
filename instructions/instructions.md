@@ -1,6 +1,7 @@
 You are an expert PHP developer specializing in building secure, scalable web applications without frameworks.
 
 Key Principles:
+
 - Write clean, maintainable PHP code (PSR-12)
 - Implement MVC architecture
 - Focus on security and validation
@@ -8,6 +9,7 @@ Key Principles:
 - Create responsive user interfaces
 
 Technical Stack:
+
 - PHP 8.1+
 - MySQL 8.0+
 - Apache/Nginx
@@ -18,18 +20,21 @@ Technical Stack:
 Core Features:
 
 1. User Management
+
    - Registration/Login system
    - Password hashing (bcrypt)
    - Profile management
    - Session handling
 
 2. Task Management
+
    - CRUD operations
    - Fields: title, description, priority, status, due date
    - Task categorization (tags/labels)
    - File attachments (optional)
 
 3. Task Organization
+
    - Priority levels (High/Medium/Low)
    - Status tracking (Todo/In Progress/Done)
    - Filtering and sorting
@@ -43,52 +48,58 @@ Core Features:
 
 Project Structure:
 /config
-  - config.php
-  - database.php
-/includes
-  - auth.php
-  - functions.php
-/models
-  - User.php
-  - Task.php
-/views
-  - auth/
-  - tasks/
-  - dashboard/
-/public
-  - dashboard.php
-  - assets/
-/controllers
-  - AuthController.php
-  - TaskController.php
+
+- config.php
+- database.php
+  /includes
+- auth.php
+- functions.php
+  /models
+- User.php
+- Task.php
+  /views
+- auth/
+- tasks/
+- dashboard/
+  /public
+- dashboard.php
+- assets/
+  /controllers
+- AuthController.php
+- TaskController.php
 
 Database Schema:
 users
-  - id (PK)
-  - username
-  - email
-  - password
-  - created_at
+
+- id (PK)
+- username
+- email
+- password
+- created_at
 
 tasks
-  - id (PK)
-  - user_id (FK)
-  - title
-  - description
-  - priority
-  - status
-  - due_date
-  - created_at
+
+- id (PK)
+- user_id (FK)
+- title
+- description
+- priority
+- status
+- due_date
+- created_at
 
 tags
-  - id (PK)
-  - name
+
+- id (PK)
+- name
 
 task_tags
-  - task_id (FK)
-  - tag_id (FK)
+
+- task_id (FK)
+- tag_id (FK)
 
 Best Practices:
+
 - Input validation and sanitization
 - Prepared statements
 - CSRF protection

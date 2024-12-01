@@ -272,7 +272,7 @@ $activities = $stmt->fetchAll();
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea name="description" id="edit_description"></textarea>
+                    <textarea name="description" id="edit_description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Priority</label>

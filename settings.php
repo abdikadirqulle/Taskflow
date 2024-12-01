@@ -133,7 +133,7 @@ $user = $stmt->fetch();
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                            <input  type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" readonly required>
                         </div>
                         <button type="submit" name="update_profile" class="btn-primary">Update Profile</button>
                     </form>

@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskFlow - Boost Your Productivity</title>
+   <!-- External CSS and Font dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
    <link rel="shortcut icon" href="assets/faviconIco.png" type="image/x-icon">
+   
+   <!-- Landing Page Styles -->
    <style>
+    
         * {
             margin: 0;
             padding: 0;
@@ -351,6 +355,7 @@
             color: #cbd5e1;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
@@ -384,7 +389,7 @@
             </div>
         </div>
     </nav>
-
+<!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Boost Your Productivity, Simplify Your Life</h1>
@@ -392,12 +397,14 @@
             <a href="register.php" class="btn btn-primary">Start Free Trial</a>
         </div>
         <div class="hero-image">
-            <img src="assets/hero-image.jpeg" alt="TaskFlow Dashboard">
+            <img src="assets/task-flow.jpg" alt="TaskFlow Dashboard">
         </div>
     </section>
-
+    <!-- Features Section -->
     <section class="features" id="features">
+            <!-- Feature Cards -->
         <div class="features-grid">
+                    <!-- Task Management Feature -->
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-list-check"></i>
@@ -405,6 +412,7 @@
                 <h3>Task Management</h3>
                 <p>Organize tasks with priorities, due dates, and categories. Stay on top of your work with our intuitive interface.</p>
             </div>
+                    <!-- Collaboration Feature -->
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-chart-line"></i>
@@ -422,6 +430,7 @@
         </div>
     </section>
 
+    <!-- princing section -->
     <section class="pricing" id="pricing">
         <h2 class="section-title">Choose Your Plan</h2>
         <div class="pricing-grid">
@@ -460,6 +469,7 @@
         </div>
     </section>
 
+    <!-- testimonials section -->
     <section class="testimonials" id="testimonials">
         <h2 class="section-title">What Our Users Say</h2>
         <div class="testimonials-grid">
@@ -502,6 +512,7 @@
         </div>
     </section>
 
+    <!-- contact section -->
     <section class="contact" id="contact">
         <h2 class="section-title">Get in Touch</h2>
         <form class="contact-form">
@@ -521,6 +532,7 @@
         </form>
     </section>
 
+    <!-- footer section -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">

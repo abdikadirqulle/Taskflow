@@ -273,7 +273,7 @@ $tasks = $stmt->fetchAll();
 
         // Edit Task Modal Functions
         function showEditTaskModal(taskId) {
-            fetch(`edit_task.php?id=${taskId}&ajax=1`)
+            fetch(`functions/edit_task.php?id=${taskId}&ajax=1`)
                 .then(response => response.json())
                 .then(task => {
                     document.getElementById('edit_task_id').value = task.id;
@@ -298,7 +298,7 @@ $tasks = $stmt->fetchAll();
             const formData = new FormData(form);
             formData.append('ajax', '1');
 
-            fetch('edit_task.php', {
+            fetch('functions/edit_task.php', {
                 method: 'POST',
                 body: formData
             })

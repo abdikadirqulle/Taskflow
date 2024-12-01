@@ -176,7 +176,7 @@ $activities = $stmt->fetchAll();
                                     <td><span class="status <?php echo str_replace(' ', '-', strtolower($task['status'])); ?>"><?php echo $task['status']; ?></span></td>
                                     <td class="actions">
                                         <a href="#" onclick="showEditTaskModal(<?php echo $task['id']; ?>)" class="edit-btn"><i class="fas fa-edit"></i></a>
-                                        <a href="delete_task.php?id=<?php echo $task['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
+                                        <a href="functions/delete_task.php?id=<?php echo $task['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

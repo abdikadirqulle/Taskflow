@@ -1,0 +1,14 @@
+ErrorDocument 404 /taskflow/404.php
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Set your base directory
+RewriteBase /taskflow/
+
+# If the requested file or directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect to 404.php
+RewriteRule ^ 404.php [L]

@@ -221,7 +221,7 @@ $activities = $stmt->fetchAll();
         <div class="modal-content">
             <span class="close" onclick="closeAddTaskModal()">&times;</span>
             <h2>Add New Task</h2>
-            <form action="add_task.php" method="POST">
+            <form action="functions/add_task.php" method="POST">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" name="title" required>

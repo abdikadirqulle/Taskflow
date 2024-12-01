@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once '../config.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute([$user_id, $task_id, "Created new task: $title"]);
 
         $pdo->commit();
-        header('Location: dashboard.php');
+        header('Location: ../dashboard.php');
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();

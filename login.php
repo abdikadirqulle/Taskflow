@@ -39,6 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #1D4ED8;
             text-decoration: none;
         }
+        .error{
+            color: red;
+        }
 
     </style>
     
@@ -51,9 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             TaskFlow
         </a>
             <h1>Sign in to your account</h1>
-            <?php if (isset($error)): ?>
-                <div class="error"><?php echo $error; ?></div>
-            <?php endif; ?>
+           
             <form method="POST" class="auth-form">
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -62,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
+                 <?php if (isset($error)): ?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endif; ?>
                 </div>
                 <button type="submit" class="btn-primary">Sign in</button>
             </form>

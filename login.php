@@ -28,6 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/faviconIco.png" type="image/x-icon">
+    <style>
+            .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1D4ED8;
+            text-decoration: none;
+        }
+
+    </style>
+    
 </head>
 <body>
     <div class="auth-container">

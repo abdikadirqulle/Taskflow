@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'taskflow1';
+$dbname = 'taskflow';
 $username = 'root';
 $password = '';
 

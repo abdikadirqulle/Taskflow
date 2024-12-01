@@ -73,7 +73,7 @@ $activities = $stmt->fetchAll();
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <a href="#" class="logo">
+                <a href="dashboard.php" class="logo">
                     <i class="fas fa-tasks"></i>
                     TaskFlow
                 </a>

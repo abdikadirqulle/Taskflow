@@ -64,7 +64,7 @@ $tasks = $stmt->fetchAll();
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <a href="#" class="logo">
+                <a href="dashboard.php" class="logo">
                     <i class="fas fa-tasks"></i>
                     TaskFlow
                 </a>
@@ -93,7 +93,7 @@ $tasks = $stmt->fetchAll();
                     </div>
                     <div class="user-dropdown" id="userDropdown">
                         <a href="settings.php"><i class="fas fa-user"></i> Profile Settings</a>
-                        <a href="#"><i class="fas fa-credit-card"></i> Billing</a>
+                        <a href="billing.php"><i class="fas fa-credit-card"></i> Billing</a>
                         <a href="functions/logout.php"><i class="fas fa-sign-out-alt"></i> logout</a>
                     </div>
                 </div>

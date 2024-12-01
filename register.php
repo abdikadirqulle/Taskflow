@@ -53,13 +53,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             max-width: 600px;
             backdrop-filter: blur(10px);
         }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1D4ED8;
+            text-decoration: none;
+        }
+        .error{
+            color: red;
+        }
    </style>
 </head>
 <body>
     <div class="auth-containers">
         <div class="auth-box">
+
             <div class="auth-header">
-                <i class="fas fa-tasks auth-icon"></i>
+                <a href="#" class="logo">
+                  <i class="fas fa-tasks"></i>
+                  TaskFlow
+               </a>
                 <h1>Create your account</h1>
                 <p>Start managing your tasks efficiently</p>
             </div>
@@ -73,21 +90,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="name">Full Name</label>
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required placeholder="name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <div class="input-group">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required placeholder="email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" required placeholder="password">
                     </div>
                 </div>
                 <button type="submit" class="btn-primary">Create Account</button>

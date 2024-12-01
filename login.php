@@ -71,20 +71,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="auth-containers">
         <div class="auth-box">
-    <a href="#" class="logo">
+          <a href="#" class="logo">
             <i class="fas fa-tasks"></i>
             TaskFlow
-        </a>
+         </a>
             <h1>Sign in to your account</h1>
            
             <form method="POST" class="auth-form">
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required placeholder="enter your email">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label >
+                    <input type="password" id="password" name="password" required placeholder="******">
                  <?php if (isset($error)): ?>
                 <div class="error"><?php echo $error; ?></div>
             <?php endif; ?>

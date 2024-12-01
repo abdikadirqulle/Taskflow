@@ -29,6 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/faviconIco.png" type="image/x-icon">
     <style>
+            body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/task-img.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+        }
             .logo {
             display: flex;
             align-items: center;
@@ -47,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 </head>
 <body>
-    <div class="auth-container">
+    <div class="auth-containers">
         <div class="auth-box">
     <a href="#" class="logo">
             <i class="fas fa-tasks"></i>

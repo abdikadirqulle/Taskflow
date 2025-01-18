@@ -80,6 +80,25 @@ This project is developed as part of my university semester 7 project to demonst
 
 ---
 
+## the APIs for the **Task Management System**:
+
+### 1. **User Authentication APIs**
+   - **POST `/register`**: Register a new user.
+   - **POST `/login`**: Log in the user.
+   - **POST `/logout`**: Log out the user.
+   - **POST `/reset-password`**: Handle password reset (without email).
+
+### 2. **Task Management APIs**
+   - **GET `/tasks`**: Get all tasks or tasks by user.
+   - **POST `/tasks`**: Create a new task.
+   - **PUT `/tasks/{taskId}`**: Update task (status, priority, etc.).
+   - **DELETE `/tasks/{taskId}`**: Delete a task.
+
+### 3. **Task Assignment APIs**
+   - **PUT `/tasks/{taskId}/assign`**: Assign a task to a user.
+   - **PUT `/tasks/{taskId}/unassign`**: Unassign a task from a user.
+
+These APIs handle user management and task operations for your system. You can implement these using PHP and MySQL for the backend.
 
 ## Future Improvements
 

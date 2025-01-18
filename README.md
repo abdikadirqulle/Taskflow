@@ -5,7 +5,7 @@
 
 The Task Management System is a simple web application designed to help users manage and organize their tasks efficiently. Users can create, update, assign, and track tasks, set priorities, and manage their accounts. The application is built using **PHP**, **HTML**, **CSS**, and **MySQL**.
 
-This project is developed as part of my university final year project to demonstrate my ability to create a functional and user-friendly web application.
+This project is developed as part of my university semester 7 project to demonstrate my ability to create a functional and user-friendly web application.
 
 ## Features
 

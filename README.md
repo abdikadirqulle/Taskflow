@@ -31,7 +31,6 @@ This project is developed as part of my university semester 7 project to demonst
 - **Creating and Managing Tasks:**
   - After logging in, users can create new tasks by entering task details such as title, description, priority, and deadline.
   - Users can edit, delete, and update the status of their tasks.
-  - Tasks can be assigned to different users based on roles.
     
 - **Password Reset:**
   - If users forget their password, they can reset it by entering their email address (this feature currently doesn’t involve email verification).

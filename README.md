@@ -22,6 +22,18 @@ This project is developed as part of my university final year project to demonst
 - **Responsive Design:**
   - The system is mobile-friendly and adapts to different screen sizes.
 
+## Usage
+
+- **User Registration & Login:**
+  - New users can register an account using their email and password.
+  - Registered users can log in using their credentials.
+
+- **Creating and Managing Tasks:**
+  - After logging in, users can create new tasks by entering task details such as title, description, priority, and deadline.
+  - Users can edit, delete, and update the status of their tasks.
+  - Tasks can be assigned to different users based on roles.
+
+
 ## Technologies Used
 
 - **Frontend:**
@@ -34,13 +46,6 @@ This project is developed as part of my university final year project to demonst
 - **Database:**
   - **MySQL:** For managing user data, task data, and password reset information.
 
-## Setup and Installation
-
-### Prerequisites
-
-- **PHP** (version 7.4 or above)
-- **MySQL**
-- A **web server** (e.g., Apache) or local development environment like **XAMPP** or **MAMP**
 
 ## Methods Used
 
@@ -53,31 +58,7 @@ This project is developed as part of my university final year project to demonst
   - **November:** Initial planning, design, and setup of database structure. Completion of core features (user registration, task creation, etc.).
   - **December:** Implementation of task management features, testing, bug fixing, and final optimizations.
 
----
 
-
-## Future Improvements
-
-- **Email-based Forgot Password**: Adding email functionality to send password reset links.
-- **Notifications**: Implementing task reminder notifications or email alerts for upcoming tasks.
-- **Advanced Reporting**: Adding analytics to track task completion rates, user productivity, etc.
-- **User Roles**: Adding more granular user roles and permissions, such as project manager or team leader.
-
----
-
-## Usage
-
-- **User Registration & Login:**
-  - New users can register an account using their email and password.
-  - Registered users can log in using their credentials.
-
-- **Creating and Managing Tasks:**
-  - After logging in, users can create new tasks by entering task details such as title, description, priority, and deadline.
-  - Users can edit, delete, and update the status of their tasks.
-  - Tasks can be assigned to different users based on roles.
-
-- **Password Reset:**
-  - If users forget their password, they can reset it by entering their email address (this feature currently doesn’t involve email verification).
 
 ## Database Structure
 
@@ -95,6 +76,18 @@ This project is developed as part of my university final year project to demonst
 - `priority`: Priority level of the task (High, Medium, Low).
 - `user_id`: The ID of the user assigned to the task.
 - `deadline`: The deadline for the task.
+
+---
+
+
+## Future Improvements
+
+- **Email-based Forgot Password**: Adding email functionality to send password reset links.
+- **Notifications**: Implementing task reminder notifications or email alerts for upcoming tasks.
+- **Advanced Reporting**: Adding analytics to track task completion rates, user productivity, etc.
+- **User Roles**: Adding more granular user roles and permissions, such as project manager or team leader.
+
+---
 
 ## License
 

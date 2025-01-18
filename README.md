@@ -1,6 +1,3 @@
-Sure! Below is a **README.md** template for your Task Management System. You can use this for your project repository on GitHub.
-
----
 
 # Task Management System
 
@@ -45,48 +42,28 @@ This project is developed as part of my university final year project to demonst
 - **MySQL**
 - A **web server** (e.g., Apache) or local development environment like **XAMPP** or **MAMP**
 
-### Installation Steps
+## Methods Used
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/task-management-system.git
-   ```
+### Agile Methodology:
+- The project follows **Agile** development methodology to ensure flexibility and adaptability during the development process. The project was broken down into **sprints** for incremental and iterative progress, with continuous feedback and adjustments based on evolving requirements.
 
-2. **Set up the database:**
-   - Create a MySQL database named `task_manager`.
-   - Import the SQL schema for creating necessary tables:
-     ```sql
-     CREATE TABLE users (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         email VARCHAR(255) NOT NULL UNIQUE,
-         password VARCHAR(255) NOT NULL,
-         role ENUM('admin', 'user') DEFAULT 'user'
-     );
+### Timeline:
+- **Project Duration:** 2 months (November and December 2024)
+- The timeline was divided into the following phases:
+  - **November:** Initial planning, design, and setup of database structure. Completion of core features (user registration, task creation, etc.).
+  - **December:** Implementation of task management features, testing, bug fixing, and final optimizations.
 
-     CREATE TABLE tasks (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         title VARCHAR(255) NOT NULL,
-         description TEXT,
-         status ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
-         priority ENUM('High', 'Medium', 'Low') DEFAULT 'Medium',
-         user_id INT,
-         deadline DATE,
-         FOREIGN KEY (user_id) REFERENCES users(id)
-     );
-     ```
+---
 
-3. **Configure the database connection:**
-   - Open the `db_config.php` file (located in the project root folder) and configure the database credentials:
-     ```php
-     define('DB_SERVER', 'localhost');
-     define('DB_USERNAME', 'root');
-     define('DB_PASSWORD', '');
-     define('DB_NAME', 'task_manager');
-     ```
 
-4. **Start the web server:**
-   - If you're using XAMPP, open the XAMPP control panel and start the Apache and MySQL services.
-   - Navigate to the project directory in your browser (e.g., `http://localhost/task-management-system/`).
+## Future Improvements
+
+- **Email-based Forgot Password**: Adding email functionality to send password reset links.
+- **Notifications**: Implementing task reminder notifications or email alerts for upcoming tasks.
+- **Advanced Reporting**: Adding analytics to track task completion rates, user productivity, etc.
+- **User Roles**: Adding more granular user roles and permissions, such as project manager or team leader.
+
+---
 
 ## Usage
 
@@ -119,34 +96,6 @@ This project is developed as part of my university final year project to demonst
 - `user_id`: The ID of the user assigned to the task.
 - `deadline`: The deadline for the task.
 
-## Screenshots
-
-Here you can add screenshots or images that demonstrate how the system looks. For example:
-
-![Login Screen](path/to/login_screenshot.png)
-
----
-
-## Future Improvements
-
-- **Email-based Forgot Password**: Adding email functionality to send password reset links.
-- **Notifications**: Implementing task reminder notifications or email alerts for upcoming tasks.
-- **Advanced Reporting**: Adding analytics to track task completion rates, user productivity, etc.
-- **User Roles**: Adding more granular user roles and permissions, such as project manager or team leader.
-
----
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
----
-
-## Acknowledgements
-
-- **[Supervisor's Name]** for their support and guidance throughout the project.
-- **[Any other acknowledgements or references]**
-
----
-
-Let me know if you need any modifications or additions to the README!
